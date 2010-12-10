@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+    <servlet>
+        <servlet-name>TreeService</servlet-name>
+        <servlet-class>com.controlj.addon.gwttree.server.TreeServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TreeService</servlet-name>
+        <url-pattern>/service/tree</url-pattern>
+    </servlet-mapping>
+   
+    <servlet>
+        <display-name>GraphServlet</display-name>
+        <servlet-name>GraphServlet</servlet-name>
+        <servlet-class>com.controlj.addon.gwttree.server.GraphServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GraphServlet</servlet-name>
+        <url-pattern>/servlet/graph</url-pattern>
+    </servlet-mapping>
+
+    <security-constraint>
+       <web-resource-collection>
+          <web-resource-name>WEB</web-resource-name>
+          <url-pattern>/*</url-pattern>
+          <http-method>GET</http-method>
+          <http-method>POST</http-method>
+       </web-resource-collection>
+       <auth-constraint>
+          <role-name>login</role-name>
+       </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+       <auth-method>FORM</auth-method>
+       <form-login-config>
+          <form-login-page>/loginout/login.jsp</form-login-page>
+          <form-error-page>/loginout/fail_login.jsp</form-error-page>
+       </form-login-config>
+    </login-config>
+</web-app>

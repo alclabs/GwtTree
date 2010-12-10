@@ -1,0 +1,11 @@
+<module>
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.gwt.json.JSON"/>
+    <inherits name="com.google.gwt.http.HTTP"/>
+    <inherits name="com.google.gwt.user.theme.standard.Standard"/>
+
+    <entry-point class='com.controlj.addon.gwttree.client.MainPage'/>
+    <stylesheet src="MainPage.css"/>
+
+    <servlet path="/service/tree" class="com.controlj.addon.gwttree.server.TreeServiceImpl"/>
+</module>

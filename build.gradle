@@ -1,0 +1,42 @@
+// this bit of complexity is to pull down the main build script from the alclabs maven repository
+// and then apply it.
+configurations { gradleScript }
+repositories { mavenRepo urls: 'http://repo.alcshare.com' }
+dependencies { gradleScript group: 'com.alcshare', name: 'alclabs-gradle', ext: 'gradle', version: '1.0.1' }
+apply from: configurations.gradleScript.resolve().iterator().next()
+
+version = '1.0'
+
+// define a configuration to use for compiling the GWT code
+configurations { gwtCompile }
+
+dependencies {
+  // into this configuration, we need the gwt-dev and gwt-user libraries
+  gwtCompile 'com.google.gwt:gwt-dev:2.0.4'
+  gwtCompile 'com.google.gwt:gwt-user:2.0.4'
+
+  compile 'com.google.gwt:gwt-servlet:2.0.4'
+  compile 'jfree:jfreechart:1.0.12'
+
+  providedCompile 'com.controlj.green:addonsupport-api-addon:1.0.8'
+  providedCompile 'javax.servlet:servlet-api:2.5'
+}
+
+// a task to compile the GWT code into gwtBuildDir
+task gwtCompile(description: 'Compiles the GWT code', type: JavaExec) {
+
+   main = 'com.google.gwt.dev.Compiler'
+   args '-war', gwtBuildDir.canonicalPath
+   args 'com.controlj.addon.gwttree.MainPage'
+   classpath sourceSets.main.java.srcDirs, configurations.gwtCompile, configurations.compile
+   maxHeapSize = '184m'
+}
+classes.dependsOn gwtCompile
+
+war {
+  // ensured that the result of the gwtCompile is included in the war file
+  from (gwtBuildDir) { exclude '.gwt-tmp' }
+}
+
+// Helper method to get the dir into which the GWT compiler should write it's output
+File getGwtBuildDir() { new File(buildDir, 'gwt') }
