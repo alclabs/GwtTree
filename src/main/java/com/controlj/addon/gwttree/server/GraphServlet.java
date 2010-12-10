@@ -1,6 +1,5 @@
 package com.controlj.addon.gwttree.server;
 
-import com.controlj.green.addonsupport.AddOnInfo;
 import com.controlj.green.addonsupport.InvalidConnectionRequestException;
 import com.controlj.green.addonsupport.access.*;
 import com.controlj.green.addonsupport.access.aspect.AnalogTrendSource;
@@ -84,7 +83,7 @@ public class GraphServlet extends HttpServlet
    {
       try
       {
-         return AddOnInfo.getAddOnInfo().getUserSystemConnection(request);
+         return DirectAccess.getDirectAccess().getUserSystemConnection(request);
       }
       catch (InvalidConnectionRequestException e)
       {

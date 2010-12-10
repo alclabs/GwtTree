@@ -2,7 +2,6 @@ package com.controlj.addon.gwttree.server;
 
 import com.controlj.addon.gwttree.client.TreeEntry;
 import com.controlj.addon.gwttree.client.TreeService;
-import com.controlj.green.addonsupport.AddOnInfo;
 import com.controlj.green.addonsupport.access.*;
 import com.controlj.green.addonsupport.access.aspect.AnalogTrendSource;
 import com.controlj.green.addonsupport.access.aspect.TrendSource;
@@ -23,7 +22,7 @@ public class TreeServiceImpl extends RemoteServiceServlet implements TreeService
    public TreeEntry getDynamicTreeRootEntry(String[] sourceNames) throws Exception
    {
       acceptor = createAcceptor(sourceNames);
-      SystemConnection connection = AddOnInfo.getAddOnInfo().getUserSystemConnection(getThreadLocalRequest());
+      SystemConnection connection = DirectAccess.getDirectAccess().getUserSystemConnection(getThreadLocalRequest());
       return connection.runReadAction(new ReadActionResult<TreeEntry>()
       {
          public TreeEntry execute(SystemAccess access) throws Exception
@@ -35,7 +34,7 @@ public class TreeServiceImpl extends RemoteServiceServlet implements TreeService
 
    public List<TreeEntry> getDynamicTreeChildren(final TreeEntry parent) throws Exception
    {
-      SystemConnection connection = AddOnInfo.getAddOnInfo().getUserSystemConnection(getThreadLocalRequest());
+      SystemConnection connection = DirectAccess.getDirectAccess().getUserSystemConnection(getThreadLocalRequest());
       return connection.runReadAction(new ReadActionResult<List<TreeEntry>>()
       {
          public List<TreeEntry> execute(SystemAccess access) throws Exception
@@ -82,7 +81,7 @@ public class TreeServiceImpl extends RemoteServiceServlet implements TreeService
       acceptor = createAcceptor(sourceNames);
       try
       {
-         SystemConnection connection = AddOnInfo.getAddOnInfo().getUserSystemConnection(getThreadLocalRequest());
+         SystemConnection connection = DirectAccess.getDirectAccess().getUserSystemConnection(getThreadLocalRequest());
          return connection.runReadAction(new ReadActionResult<TreeEntry>()
          {
             public TreeEntry execute(SystemAccess access) throws Exception

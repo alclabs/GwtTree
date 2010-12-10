@@ -18,7 +18,7 @@ dependencies {
   compile 'com.google.gwt:gwt-servlet:2.0.4'
   compile 'jfree:jfreechart:1.0.12'
 
-  providedCompile 'com.controlj.green:addonsupport-api-addon:1.0.8'
+  providedCompile 'com.controlj.green:directaccess-api-addon:1.1.0.+'
   providedCompile 'javax.servlet:servlet-api:2.5'
 }
 
