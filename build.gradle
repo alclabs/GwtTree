@@ -2,10 +2,15 @@
 // and then apply it.
 configurations { gradleScript }
 repositories { mavenRepo urls: 'http://repo.alcshare.com' }
-dependencies { gradleScript group: 'com.alcshare', name: 'alclabs-gradle', ext: 'gradle', version: '1.0.2' }
+dependencies { gradleScript group: 'com.alcshare', name: 'alclabs-gradle', ext: 'gradle', version: '1.0.5' }
 apply from: configurations.gradleScript.resolve().iterator().next()
 
-version = '2.0'
+info {
+  name = 'GWT Tree'
+  description = 'Developer sample using Google Web Toolkit to render a tree and retrieve trend data'
+  version = '2.0'
+  vendor = 'ALC Labs'
+}
 
 // define a configuration to use for compiling the GWT code
 configurations { gwtCompile }
